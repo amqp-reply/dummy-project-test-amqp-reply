@@ -14,14 +14,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
-          extensions: amqp
-          tools: composer:v2, symfony
-
-
       - name: Login to GHCR
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
@@ -31,7 +23,7 @@ jobs:
           compose-file: "./docker-compose.yaml"
 
       - name: Build images
-        run: docker-compose build
+        run: docker compose build
 
       - name: Push images
-        run: docker-compose push
+        run: docker compose push
