@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   requester:
-    image: ghcr.io/amqp-reply/requester-app:latest
+    image: ghcr.io/amqp-reply/dummy-project-test-amqp-reply/requester-app:latest
     build:
       context: .
       dockerfile: Dockerfile
