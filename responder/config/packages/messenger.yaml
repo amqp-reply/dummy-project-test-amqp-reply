@@ -1,0 +1,16 @@
+framework:
+    messenger:
+        transports:
+            my_transport_sync:
+                dsn: 'amqp://guest:guest@rabbitmq:5672'
+                retry_strategy:
+                    max_retries: 0
+                options:
+                    reply: ~
+                    exchange:
+                        name: query_exchange
+                        type: topic
+                    queues:
+                        query_queue: ~
+        routing:
+            'Shared\Query\MyQuery': my_transport_sync

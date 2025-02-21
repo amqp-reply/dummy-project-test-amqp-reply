@@ -26,7 +26,7 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash \
     && mv /root/.symfony*/bin/symfony /usr/local/bin/symfony
 
 # Copy existing application directory
-COPY ./${APP_DIR} /var/www/html
+COPY ${APP_DIR} /var/www/html
 
 # Expose application port
 EXPOSE 8000
