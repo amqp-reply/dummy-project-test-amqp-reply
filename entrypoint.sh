@@ -1,4 +1,8 @@
 #!/bin/sh
 set -e
-composer install --no-interaction --prefer-dist --optimize-autoloader
+
+if [ ! -d "vendor" ]; then
+  composer install --no-interaction --prefer-dist --optimize-autoloader
+fi
+
 exec "$@"

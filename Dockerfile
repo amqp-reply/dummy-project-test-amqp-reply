@@ -28,6 +28,9 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash \
 # Copy existing application directory
 COPY ${APP_DIR} /var/www/html
 COPY ./shared /shared
+COPY ./entrypoint.sh /entrypoint.sh
 
 # Expose application port
 EXPOSE 8000
+
+ENTRYPOINT ["/entrypoint.sh"]
