@@ -1,4 +1,4 @@
-docker-compose.dev.yaml
+./docker-compose.dev.yaml
 ### Symfony template
 # Cache and logs (Symfony2)
 /app/cache/*
