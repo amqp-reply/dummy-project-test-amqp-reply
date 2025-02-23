@@ -6,9 +6,6 @@ services:
       dockerfile: Dockerfile
       args:
         APP_DIR: ./requester
-    ports:
-      - "8000:8000"
-    command: ["symfony", "server:start", "--no-tls", "--port=8000", "--allow-http", "--listen-ip=0.0.0.0"]
 
   responder:
     image: ghcr.io/amqp-reply/test-responder-amqp-reply:latest
@@ -17,6 +14,3 @@ services:
       dockerfile: Dockerfile
       args:
         APP_DIR: ./responder
-    ports:
-      - "8001:8000"
-    command: ["php", "bin/console", "messenger:consume", "my_transport_sync", "--time-limit=3600"]
