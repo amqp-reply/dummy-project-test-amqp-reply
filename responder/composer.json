@@ -50,6 +50,7 @@
         }
     },
     "replace": {
+        "amqp-reply/amqp-reply": "*",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
         "symfony/polyfill-php72": "*",

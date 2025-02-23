@@ -1,0 +1,40 @@
+services:
+  rabbitmq:
+    image: docker.io/library/rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 1s
+      timeout: 1s
+      retries: 10
+
+  responder:
+    image: ghcr.io/amqp-reply/test-responder-amqp-reply:latest
+    pull_policy: never
+    ports:
+      - "8001:8000"
+    command: ["php", "bin/console", "messenger:consume", "my_transport_sync", "--time-limit=3600"]
+    volumes:
+      - /bundle:/bundle:ro
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  requester:
+    image: ghcr.io/amqp-reply/test-requester-amqp-reply:latest
+    pull_policy: never
+    ports:
+      - "8000:8000"
+    command: ["symfony", "server:start", "--no-tls", "--port=8000", "--allow-http", "--listen-ip=0.0.0.0"]
+    volumes:
+      - /bundle:/bundle:ro
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      responder:
+        condition: service_started

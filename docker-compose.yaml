@@ -1,16 +1,18 @@
 services:
-  requester:
-    image: ghcr.io/amqp-reply/test-requester-amqp-reply:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        APP_DIR: ./requester
-
   responder:
     image: ghcr.io/amqp-reply/test-responder-amqp-reply:latest
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
       args:
         APP_DIR: ./responder
+        SHARED_DIR: ./shared
+
+  requester:
+    image: ghcr.io/amqp-reply/test-requester-amqp-reply:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        APP_DIR: ./requester
+        SHARED_DIR: ./shared
