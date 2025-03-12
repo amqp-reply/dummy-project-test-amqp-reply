@@ -19,5 +19,5 @@ COPY ${SHARED_DIR} /shared
 RUN mkdir "/bundle"
 
 
-RUN composer install --no-interaction --prefer-source --optimize-autoloader --ignore-platform-reqs
+RUN composer install --no-interaction --prefer-source --optimize-autoloader --ignore-platform-reqs --no-scripts
 EXPOSE 8000
